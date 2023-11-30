@@ -44,6 +44,7 @@ public class SecurityConfig {
     @Order(1)
     SecurityFilterChain adminPageSecurity(HttpSecurity http) throws Exception {
         return http
+                .cors(Customizer.withDefaults())
                 .securityMatcher(AntPathRequestMatcher.antMatcher("/1/admin/**"))
                 .authorizeHttpRequests(auth ->{
                     auth.requestMatchers("/1/admin/**").hasAuthority("ADMIN");
@@ -74,8 +75,9 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:2929"));
-        configuration.setAllowedOrigins(Arrays.asList("GET","POST","PUT","DELETE"));
-        configuration.setAllowedHeaders(List.of("Authorization"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization"));
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",configuration);
         return source;
