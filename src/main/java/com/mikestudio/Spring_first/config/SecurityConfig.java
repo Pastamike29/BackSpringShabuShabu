@@ -41,7 +41,7 @@ public class SecurityConfig {
 
 
     @Bean  //FOR adminPage security
-    @Order(1)
+    @Order(2)
     SecurityFilterChain adminPageSecurity(HttpSecurity http) throws Exception {
         return http
                 .cors(Customizer.withDefaults())
@@ -56,7 +56,7 @@ public class SecurityConfig {
     }
 
     @Bean  // Permitted for normal page
-    @Order(2) //Ordering Request
+    @Order(1) //Ordering Request
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
                 .cors(Customizer.withDefaults())
@@ -71,10 +71,10 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
+    @Bean //For Make other Source/Path can use this backend api
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:2929"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization"));
         configuration.setAllowCredentials(true);
@@ -83,6 +83,8 @@ public class SecurityConfig {
         return source;
 
     }
+
+
 
 
 

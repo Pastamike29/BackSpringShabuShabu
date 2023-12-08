@@ -11,13 +11,16 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Payment {
+public class    Payment {
     @Id
     private String paymentId;
     private String userId;
     private String reserveDataId;
     private String accountName;
     private Integer price;
-    private String date;
+    private String paymentDate;
+    private String paymentName;
+    private String statusPicture;
+    private String statusPay;
 
 }

@@ -19,6 +19,7 @@ public class Table {
     private String tableId;
     private String userId;
     private String tableStatus;
+    private Integer tableNumberType;
     private String reserveTime;
 
     private String tableType;

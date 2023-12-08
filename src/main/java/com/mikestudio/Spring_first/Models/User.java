@@ -22,6 +22,13 @@ public class User  {
     private String email;
     private String dob;
     private String role;
+    private String firstName;
+    private String LastName;
+    private String firstLastName;
+    private String OTP;
+    private Boolean email_verified;
+
+
 
 
 }

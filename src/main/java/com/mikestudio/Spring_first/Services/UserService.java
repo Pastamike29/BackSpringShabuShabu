@@ -6,16 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 public  class UserService   {
 
 
-
+    @Autowired
     private final UserRepository userRepository;
 
-    @Autowired
+    //User for authenticate Login
+    public boolean isValidUser(String username , String password){
+        Optional<User> userOptional = userRepository.findByUsernameAndPassword(username,password);
+        return userOptional.isPresent();
+    }
+
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -40,10 +47,7 @@ public  class UserService   {
     }
 
 
-    public List<User> getEmail(User email) {
-        return userRepository.findAll();
 
-    }
 }
 
 

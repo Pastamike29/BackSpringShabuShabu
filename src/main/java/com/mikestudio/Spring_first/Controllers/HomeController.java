@@ -19,7 +19,7 @@ public class HomeController {
         return "This is homepage";
     }
 
-    @GetMapping("/1/admin")
-    public void adminPage(){
-    }
+//    @GetMapping("/1/admin")
+//    public void adminPage(){
+//    }
 }

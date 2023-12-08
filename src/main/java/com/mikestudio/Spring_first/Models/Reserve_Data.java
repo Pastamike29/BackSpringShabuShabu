@@ -20,13 +20,16 @@ public class Reserve_Data {
     @Id
     private String reserveDataId;
 //    @DocumentReference
-
     private String userId;
 //    @DocumentReference
     private String tableId;
     private String reserveTime;
+    private String reserveDate;
+    private String reserveStatus;
 
     private String tableTypes;
     private Integer userQuantity;
+    private Integer ValueOfCustomer;
+
 
 }
