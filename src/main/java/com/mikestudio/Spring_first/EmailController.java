@@ -2,6 +2,7 @@ package com.mikestudio.Spring_first;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ public class EmailController {
     private EmailService service;
 
     //Sending Email
-    @GetMapping("/0/email")
+    @PostMapping ("/0/email")
     public void triggerMail() {
         service.sendSimpleEmail(
                 "This is From SINNCOSTANSHABU for Authentication your id",

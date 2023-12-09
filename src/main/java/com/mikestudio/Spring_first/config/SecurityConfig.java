@@ -39,6 +39,22 @@ public class SecurityConfig {
                         .build());
     }
 
+    @Bean  // Permitted for normal page
+    @Order(1) //Ordering Request
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        return http
+                .cors(Customizer.withDefaults())
+                .authorizeHttpRequests(auth ->{
+                    auth.requestMatchers("/0/**").permitAll();
+                    auth.requestMatchers("/error").permitAll();
+                    auth.anyRequest().authenticated();
+                })
+                .csrf().disable()//important
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .httpBasic(Customizer.withDefaults())
+                .build();
+    }
+
 
     @Bean  //FOR adminPage security
     @Order(2)
@@ -55,21 +71,6 @@ public class SecurityConfig {
 
     }
 
-    @Bean  // Permitted for normal page
-    @Order(1) //Ordering Request
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        return http
-                .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(auth ->{
-                    auth.requestMatchers("/0/**").permitAll();
-                    auth.requestMatchers("/error").permitAll();
-                    auth.anyRequest().authenticated();
-                })
-                .csrf().disable()//important
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .httpBasic(Customizer.withDefaults())
-                .build();
-    }
 
     @Bean //For Make other Source/Path can use this backend api
     CorsConfigurationSource corsConfigurationSource(){

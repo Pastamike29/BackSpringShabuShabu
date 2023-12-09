@@ -3,9 +3,12 @@ package com.mikestudio.Spring_first.Controllers;
 import com.mikestudio.Spring_first.Models.Payment;
 import com.mikestudio.Spring_first.Services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 public class PaymentController {
@@ -29,7 +32,9 @@ public class PaymentController {
 
     @PostMapping("/0/payment")
     public Payment createPayment(@RequestBody Payment payment){
+        payment.setCreatedAt(LocalDateTime.now());
         paymentService.put(payment);
+
         return payment;
     }
 

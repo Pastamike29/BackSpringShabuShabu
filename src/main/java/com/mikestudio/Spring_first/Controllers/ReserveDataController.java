@@ -1,11 +1,14 @@
 package com.mikestudio.Spring_first.Controllers;
 
+import ch.qos.logback.core.util.Loader;
 import com.mikestudio.Spring_first.Models.Reserve_Data;
 import com.mikestudio.Spring_first.Services.ReserveDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 public class ReserveDataController {
@@ -28,7 +31,9 @@ public class ReserveDataController {
 
     @PostMapping("/0/reserveData")
     public Reserve_Data createReserveData(@RequestBody Reserve_Data reserveData){
+        reserveData.setCreatedAt(LocalDateTime.now());
         reserveDataService.put(reserveData);
+
         return reserveData;
     }
 

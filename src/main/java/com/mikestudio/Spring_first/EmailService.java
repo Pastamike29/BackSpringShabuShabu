@@ -1,16 +1,25 @@
 package com.mikestudio.Spring_first;
 
+import com.mikestudio.Spring_first.Services.UserService;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.connection.ConnectionPoolSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class EmailService{
     @Autowired
     private JavaMailSender mailSender;
+    @Autowired
+    private  UserService userService;
+
 
     public void sendSimpleEmail(
             String subject,
@@ -19,20 +28,15 @@ public class EmailService{
     ) {
 
 
-//        MimeMessage message = new MimeMessage(session);
         SimpleMailMessage message = new SimpleMailMessage();
-
 
         try {
             message.setFrom("sinncostanshabu@gmail.com");
-//            message.setFrom(new InternetAddress());
             message.setText(body);
             message.setSubject(subject);
-//            message.addRecipients(Message.RecipientType.BCC, String.valueOf(new InternetAddress("")));
-            System.out.println(email);
-            message.setBcc(String.valueOf(email));
+            message.setBcc(String.valueOf(userService.getEmail(email)));
+            System.out.println("this is " + email);
             message.setSentDate(new Date());
-
 
             mailSender.send(message);
             System.out.println("Sent mail success");
@@ -40,6 +44,7 @@ public class EmailService{
             throw new RuntimeException(e);
         }
     }
+
 }
 
 

@@ -10,11 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 
 @RestController
 public class UserController  {
-
-//    private  Map<String ,User> DB = new HashMap<>();  //for not COnnect to database
     @Autowired
     private  UserService userService;
 
@@ -49,13 +49,9 @@ public class UserController  {
 
     @PostMapping("/0/user")
     public User createUser(@RequestBody User user){
+        user.setCreatedAt(LocalDateTime.now());
+        user.setRole("USER");
         userService.put(user);
-//        userService.get(user.getUserId(),user);
-//        userService.put(user.getUsername(),user);
-//        userService.put(user.getPassword(),user);
-//        userService.put(user.getPhonenumber(),user);
-//        userService.put(user.getEmail(),user);
-//        userService.put(user.getDob(),user);
 
         return user;
 

@@ -5,7 +5,6 @@ import com.mikestudio.Spring_first.Repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -21,7 +20,10 @@ public  class UserService   {
         Optional<User> userOptional = userRepository.findByUsernameAndPassword(username,password);
         return userOptional.isPresent();
     }
+    public User getEmail(String email) {
+        return userRepository.findByEmail(email);
 
+    }
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;

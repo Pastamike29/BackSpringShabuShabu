@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 public class DashboardController {
 
@@ -35,7 +37,8 @@ public class DashboardController {
 
     @PostMapping("/0/dashboard")
     public Dashboard createDashboard(@RequestBody Dashboard dashboard){
-         dashboardService.put(dashboard);
+        dashboard.setCreatedAt(LocalDateTime.now());
+        dashboardService.put(dashboard);
          return dashboard;
     }
 

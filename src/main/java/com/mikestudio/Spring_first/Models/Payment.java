@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import java.time.LocalDateTime;
+
 @Document(collection = "PAYMENT")
 @Data
 @AllArgsConstructor
@@ -15,12 +17,12 @@ public class    Payment {
     @Id
     private String paymentId;
     private String userId;
-    private String reserveDataId;
     private String accountName;
     private Integer price;
     private String paymentDate;
     private String paymentName;
     private String statusPicture;
     private String statusPay;
+    private LocalDateTime createdAt;
 
 }

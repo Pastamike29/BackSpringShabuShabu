@@ -3,9 +3,12 @@ package com.mikestudio.Spring_first.Controllers;
 import com.mikestudio.Spring_first.Models.HistoryData;
 import com.mikestudio.Spring_first.Services.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 
 @RestController
@@ -34,8 +37,10 @@ public class HistoryDataController {
     }
 
     @PostMapping("/0/historyData")
-    public HistoryData createHistoryData(@PathVariable HistoryData historyData){
+    public HistoryData createHistoryData(@RequestBody HistoryData historyData){
+        historyData.setCreatedAt(LocalDateTime.now());
         historyService.put(historyData);
+
         return historyData;
     }
 

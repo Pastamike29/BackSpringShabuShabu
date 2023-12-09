@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Document(collection = "RESERVE_DATA")
 @Data
@@ -19,17 +20,15 @@ import java.sql.Timestamp;
 public class Reserve_Data {
     @Id
     private String reserveDataId;
-//    @DocumentReference
     private String userId;
-//    @DocumentReference
     private String tableId;
     private String reserveTime;
     private String reserveDate;
     private String reserveStatus;
 
     private String tableTypes;
-    private Integer userQuantity;
     private Integer ValueOfCustomer;
+    private LocalDateTime createdAt;
 
 
 }

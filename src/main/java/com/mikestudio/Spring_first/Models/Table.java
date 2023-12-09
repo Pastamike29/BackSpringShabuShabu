@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Document(collection = "TABLE")
 @Data
@@ -21,7 +22,7 @@ public class Table {
     private String tableStatus;
     private Integer tableNumberType;
     private String reserveTime;
-
     private String tableType;
-    private Integer userQuantity;
+    private Integer QuantityOfChair;
+    private LocalDateTime createdAt;
 }
