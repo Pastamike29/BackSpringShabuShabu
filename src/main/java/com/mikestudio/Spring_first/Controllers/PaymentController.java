@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @RestController
 public class PaymentController {
 
-//    private Map<String,Payment> DB = new HashMap<>(); // for not connect to database
     @Autowired
     private PaymentService paymentService;
 

@@ -16,7 +16,6 @@ import java.util.Map;
 
 @RestController
 public class TableController {
-    private Map<String,Table> DB = new HashMap<>();
 
     @Autowired
     private TableService tableService;

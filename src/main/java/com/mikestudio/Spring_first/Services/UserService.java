@@ -20,6 +20,7 @@ public  class UserService   {
         Optional<User> userOptional = userRepository.findByUsernameAndPassword(username,password);
         return userOptional.isPresent();
     }
+
     public User getEmail(String email) {
         return userRepository.findByEmail(email);
 

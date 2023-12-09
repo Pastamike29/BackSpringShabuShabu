@@ -35,7 +35,6 @@ public class EmailService{
             message.setText(body);
             message.setSubject(subject);
             message.setBcc(String.valueOf(userService.getEmail(email)));
-            System.out.println("this is " + email);
             message.setSentDate(new Date());
 
             mailSender.send(message);
