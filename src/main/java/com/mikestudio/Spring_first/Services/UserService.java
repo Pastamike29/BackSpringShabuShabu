@@ -69,7 +69,6 @@ public  class UserService   {
 
     //for saveRandomNumber(OTP)
     public void save(User user,String num) {
-        user.setOTP(num);
 
         userRepository.save(user);
     }

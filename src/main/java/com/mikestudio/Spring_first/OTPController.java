@@ -24,7 +24,6 @@ public class OTPController {
     public ResponseEntity<String> verifyOTP(@RequestBody String enteredOTP){
         String genOTP = otPservice.getOTP();
         if (otPservice.isValidOTP(enteredOTP,genOTP)){
-
             userService.save(new User(),genOTP);
 
             return ResponseEntity.ok("OTP Verified!!");

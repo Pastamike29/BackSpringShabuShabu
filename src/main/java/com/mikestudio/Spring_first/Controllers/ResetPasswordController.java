@@ -23,18 +23,22 @@ public class ResetPasswordController {
     }
 
     public boolean isValidEmail(String enteredEmail,String email){
-        return enteredEmail.equals(email);
+        if (enteredEmail.equals(email)){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     @PostMapping("/0/forgotPassword")
-    public ResponseEntity<String> forgotPassword(@RequestBody String enteredEmail){
+    public ResponseEntity<String> forgotPassword(@RequestBody String enteredEmail,String email){
 
         try {
-            String email = String.valueOf(userService.getEmail(enteredEmail));
             String resetPasswordLink = "http://localhost:3000/login";
             String token = UUID.randomUUID().toString();
 
-                userService.updateResetPasswordToken(token,enteredEmail);
-                emailController.sendResetPasswordEmail(enteredEmail, resetPasswordLink);
+            userService.updateResetPasswordToken(token,email);
+            emailController.sendResetPasswordEmail(email, resetPasswordLink);
 
         }
         catch (Exception e){

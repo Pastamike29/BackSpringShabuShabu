@@ -50,6 +50,7 @@ public class UserController  {
     public User createUser(@RequestBody User user){
         user.setCreatedAt(LocalDateTime.now());
         user.setRole("USER");
+        user.setOTP(otPservice.getOTP());
         userService.put(user);
 
         return user;
