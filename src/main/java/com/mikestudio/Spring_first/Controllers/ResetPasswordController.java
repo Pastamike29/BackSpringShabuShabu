@@ -4,7 +4,6 @@ import com.mikestudio.Spring_first.EmailService;
 import com.mikestudio.Spring_first.Services.PasswordResetService;
 import com.mikestudio.Spring_first.Services.UserService;
 import com.mikestudio.Spring_first.Utility;
-import lombok.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URL;
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.Random;
 
 
 @RestController
@@ -41,16 +38,18 @@ public class ResetPasswordController {
     @PostMapping("/0/forgotPassword")
     public ResponseEntity<String> forgotPassword(@RequestBody String enteredEmail){
         String email = "" ;
-        String URL = "http:localhost3000/0/forgotPassword";
+        String URL = "http://localhost:3000/0/forgotPassword";
         String token = Arrays.toString(SecureRandom.getSeed(30));
-        String resetPasswordLink = URL + "/reset_password?token =" + token;
-        userService.getEmail(email);
+        String resetPasswordLink = URL;
+        email = String.valueOf(userService.getEmail(email));
         try {
             if (passwordResetService.isValidEmail(enteredEmail, email)) {
                 userService.updateResetPasswordToken(token,enteredEmail);
                 emailService.sendResetPasswordEmail(enteredEmail, resetPasswordLink);
 
             } else {
+                userService.updateResetPasswordToken(token,enteredEmail);
+                emailService.sendResetPasswordEmail(enteredEmail, resetPasswordLink);
                 return ResponseEntity.badRequest().body("Invalid Email , Please Enter again");
             }
         }
