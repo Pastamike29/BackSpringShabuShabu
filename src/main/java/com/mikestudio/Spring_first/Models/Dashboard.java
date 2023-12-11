@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Dashboard {
     @Id
     private String dashboardId;
-    private String userId;
+    private String username;
     private String tableId;
     private String reserveDataId;
     private Integer totalTableBooked;

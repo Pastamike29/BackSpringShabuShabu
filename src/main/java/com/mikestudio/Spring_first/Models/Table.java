@@ -18,11 +18,11 @@ import java.time.LocalDateTime;
 public class Table {
     @Id
     private String tableId;
-    private String userId;
+    private String username;
     private String tableStatus;
     private Integer tableNumberType;
     private String reserveTime;
     private String tableType;
-    private Integer QuantityOfChair;
+    private Integer quantityOfChair;
     private LocalDateTime createdAt;
 }

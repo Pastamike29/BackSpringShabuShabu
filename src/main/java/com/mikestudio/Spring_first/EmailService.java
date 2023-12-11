@@ -1,17 +1,16 @@
 package com.mikestudio.Spring_first;
 
 import com.mikestudio.Spring_first.Services.UserService;
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
-import com.mongodb.client.MongoClient;
-import com.mongodb.connection.ConnectionPoolSettings;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class EmailService{
@@ -20,7 +19,7 @@ public class EmailService{
     @Autowired
     private  UserService userService;
 
-
+    //Email for Authentication register
     public void sendSimpleEmail(
             String subject,
             String body,
@@ -41,6 +40,34 @@ public class EmailService{
             System.out.println("Sent mail success");
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    //Email for reset password
+    public void sendResetPasswordEmail (String recipientEmail,String link) throws MessagingException, UnsupportedEncodingException {
+           {
+                link = "http:localhost3000/0/forgotPassword";
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+
+            helper.setFrom("sinncostanshabu@gmail.com", "SINNCOSTANSHABU Support");
+            helper.setTo(recipientEmail);
+
+            String subject = "Here's the link to reset your password";
+
+            String content = "<p>Hello,</p>"
+                    + "<p>You have requested to reset your password.</p>"
+                    + "<p>Click the link below to change your password:</p>"
+                    + "<p><a href=\"" + link + "\">Change my password</a></p>"
+                    + "<br>"
+                    + "<p>Ignore this email if you do remember your password, "
+                    + "or you have not made the request.</p>";
+
+            helper.setSubject(subject);
+
+            helper.setText(content, true);
+
+            mailSender.send(message);
         }
     }
 

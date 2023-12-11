@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class HistoryData {
     @Id
     private String historyDataId;
-    private String userId;
+    private String username;
     private Integer historyTime;
     private LocalDateTime createdAt;
 }

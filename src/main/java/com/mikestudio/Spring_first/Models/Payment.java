@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class    Payment {
     @Id
     private String paymentId;
-    private String userId;
+    private String username;
     private String accountName;
     private Integer price;
     private String paymentDate;

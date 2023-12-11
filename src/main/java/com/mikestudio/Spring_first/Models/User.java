@@ -16,8 +16,9 @@ import java.util.function.Consumer;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User  {
-    @Id
+
     private String userId;
+    @Id
     private String username;
     private String password;
     private String phonenumber;
@@ -29,6 +30,9 @@ public class User  {
     private String firstLastName;
     private String OTP;
     private Boolean email_verified;
+    private String resetPasswordToken;
+
+    private LocalDateTime expiryDate;
     private LocalDateTime createdAt;
 
 

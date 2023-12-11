@@ -3,15 +3,15 @@ package com.mikestudio.Spring_first.Services;
 import com.mikestudio.Spring_first.Models.User;
 import com.mikestudio.Spring_first.Repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.ErrorResponseException;
 
 import java.util.Optional;
 
 
 @Service
 public  class UserService   {
-
-
     @Autowired
     private final UserRepository userRepository;
 
@@ -20,15 +20,33 @@ public  class UserService   {
         Optional<User> userOptional = userRepository.findByUsernameAndPassword(username,password);
         return userOptional.isPresent();
     }
-
+    //For get Email from database
     public User getEmail(String email) {
         return userRepository.findByEmail(email);
-
     }
+
+    public void updateResetPasswordToken(String token,String email){
+        User user = userRepository.findByEmail(email);
+        if (user != null){
+
+            user.setResetPasswordToken(token);
+
+            userRepository.save(user);
+        }else {
+            throw new ErrorResponseException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public User getByResetPasswordToken(String token){
+        return userRepository.findByResetPasswordToken(token);
+    }
+
+
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
 
 
     public Iterable<User> get() {
@@ -49,8 +67,12 @@ public  class UserService   {
         userRepository.deleteById(Integer.valueOf(userId));
     }
 
-
-
+    //for saveRandomNumber(OTP)
+    public void save(String num) {
+        User user = new User();
+        user.setOTP(num);
+        userRepository.save(user);
+    }
 }
 
 
