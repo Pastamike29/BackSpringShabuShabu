@@ -48,7 +48,9 @@ public class EmailController {
             message.setTo(emailRequest.getTo());
             message.setSubject("Authentication Information"); // Set your subject here
             message.setText(messageContent);
-            userService.save(new User(),genOTP);
+            User user = new User();
+            user.setOTP(genOTP);
+            userService.put(user);
             // Send the email
             mailSender.send(message);
 
