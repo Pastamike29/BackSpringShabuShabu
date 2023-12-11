@@ -1,8 +1,8 @@
 package com.mikestudio.Spring_first.Models;
 
+import jakarta.annotation.Generated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -17,9 +17,8 @@ import java.util.function.Consumer;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User  {
-    @Generated
-    private String userId;
     @Id
+    private String userId;
     private String username;
     private String password;
     private String phonenumber;
