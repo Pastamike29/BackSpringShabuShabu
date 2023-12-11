@@ -5,6 +5,7 @@ import com.mikestudio.Spring_first.Services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,24 @@ public class PaymentController {
         paymentService.put(payment);
 
         return payment;
+    }
+
+    @PutMapping("/0/payment")
+    public Payment updatePayment(@PathVariable String paymentId,@RequestBody Payment updatedPayment){
+        Payment existedPayment = paymentService.get(paymentId);
+        if (existedPayment == null){
+            ResponseEntity.notFound();
+            return null;
+        }
+        existedPayment.setUsername(updatedPayment.getUsername());
+        existedPayment.setPaymentName(updatedPayment.getPaymentName());
+        existedPayment.setPaymentDate(updatedPayment.getPaymentDate());
+        existedPayment.setAccountName(updatedPayment.getAccountName());
+        existedPayment.setStatusPicture(updatedPayment.getStatusPicture());
+        existedPayment.setStatusPay(updatedPayment.getStatusPay());
+        existedPayment.setCreatedAt(LocalDateTime.now());
+
+        return paymentService.updatePayment(existedPayment);
     }
 
     @DeleteMapping("/0/payment")

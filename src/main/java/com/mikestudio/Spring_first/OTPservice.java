@@ -21,7 +21,6 @@ public class OTPservice {
 
     //Generate number
 
-    @GetMapping("/0/getOTP")
     public String getOTP() {
         Random rand = new Random();
         int number = rand.nextInt(99999);

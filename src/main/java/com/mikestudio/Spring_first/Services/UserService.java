@@ -73,6 +73,10 @@ public  class UserService   {
 
         userRepository.save(user);
     }
+
+    public User updateUser(User existedUser) {
+        return userRepository.save(existedUser);
+    }
 }
 
 

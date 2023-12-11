@@ -30,5 +30,9 @@ public class PaymentService {
     public void put(Payment payment) {
         paymentRepository.save(payment);
     }
+
+    public Payment updatePayment(Payment existedPayment) {
+        return  paymentRepository.save(existedPayment);
+    }
 }
 

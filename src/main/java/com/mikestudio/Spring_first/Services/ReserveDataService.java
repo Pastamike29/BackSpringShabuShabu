@@ -30,4 +30,8 @@ public class ReserveDataService {
     public void remove(String reserveDataId) {
         reserveDataRepository.deleteById(reserveDataId);
     }
+
+    public Reserve_Data updateReserveData(Reserve_Data existedReserveData) {
+        return  reserveDataRepository.save(existedReserveData);
+    }
 }

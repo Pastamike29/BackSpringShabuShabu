@@ -1,6 +1,7 @@
 package com.mikestudio.Spring_first.Services;
 
 import com.mikestudio.Spring_first.Models.Table;
+import com.mikestudio.Spring_first.Models.User;
 import com.mikestudio.Spring_first.Repositorys.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,9 @@ public class TableService {
 
     public void remove(Table tableId) {
         tableRepository.deleteById(String.valueOf(tableId));
+    }
+
+    public Table updateTable(Table existedTable) {
+        return tableRepository.save(existedTable);
     }
 }

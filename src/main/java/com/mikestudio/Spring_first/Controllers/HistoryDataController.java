@@ -1,10 +1,12 @@
 package com.mikestudio.Spring_first.Controllers;
 
 import com.mikestudio.Spring_first.Models.HistoryData;
+import com.mikestudio.Spring_first.Models.Table;
 import com.mikestudio.Spring_first.Services.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +45,21 @@ public class HistoryDataController {
 
         return historyData;
     }
+    @PutMapping("/0/history")
+    public HistoryData updateHistory(@PathVariable String historyDataId, @RequestBody HistoryData updatedHistory){
+        HistoryData  existedHistory = historyService.get(historyDataId);
+        if (existedHistory == null){
+            ResponseEntity.notFound();
+            return null;
+        }
+        existedHistory.setUsername(updatedHistory.getUsername());
+        existedHistory.setHistoryTime(updatedHistory.getHistoryTime());
+
+        existedHistory.setCreatedAt(LocalDateTime.now());
+
+        return historyService.updateHistory(existedHistory);
+    }
+
 
     @DeleteMapping("/0/historyData")
     public void deleteHistoryData(@RequestBody String historyDataId){

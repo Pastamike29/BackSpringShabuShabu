@@ -29,4 +29,8 @@ public class HistoryService {
     public void delete(String historyDataId) {
         historyRepository.deleteById(historyDataId);
     }
+
+    public HistoryData updateHistory(HistoryData existedHistory) {
+        return historyRepository.save(existedHistory);
+    }
 }

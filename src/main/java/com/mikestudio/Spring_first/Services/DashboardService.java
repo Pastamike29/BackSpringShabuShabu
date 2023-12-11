@@ -30,4 +30,8 @@ public class DashboardService {
     public void delete(String dashboardId) {
         dashboardRepository.deleteById(dashboardId);
     }
+
+    public Dashboard updateDashobord(Dashboard existedDashboard) {
+        return dashboardRepository.save(existedDashboard);
+    }
 }

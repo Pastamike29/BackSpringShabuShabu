@@ -27,7 +27,7 @@ public class User  {
     private String role;
     private String firstName;
     private String lastName;
-    private String firstLastName;
+    private String fullName;
     private String OTP;
     private Boolean email_verified;
     private String resetPasswordToken;

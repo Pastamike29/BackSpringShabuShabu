@@ -1,5 +1,6 @@
 package com.mikestudio.Spring_first.Controllers;
 
+import com.mikestudio.Spring_first.Models.Payment;
 import com.mikestudio.Spring_first.Models.User;
 import com.mikestudio.Spring_first.EmailService;
 import com.mikestudio.Spring_first.OTPservice;
@@ -37,7 +38,7 @@ public class UserController  {
         }
     }
 
-    @GetMapping("/0/user")
+    @GetMapping("/0/getuser")
     public Iterable<User> getAllUsers(){
         return userService.get();
     }
@@ -59,6 +60,27 @@ public class UserController  {
 
         return user;
 
+    }
+    @PutMapping("/0/user")
+    public User updateUser(@PathVariable Integer userId, @RequestBody User updatedUser){
+        User existedUser = userService.get(userId);
+        if (existedUser == null){
+            ResponseEntity.notFound();
+            return null;
+        }
+        existedUser.setUsername(updatedUser.getUsername());
+        existedUser.setPassword(updatedUser.getPassword());
+        existedUser.setPhonenumber(updatedUser.getPhonenumber());
+        existedUser.setEmail(updatedUser.getEmail());
+        existedUser.setDob(updatedUser.getDob());
+        existedUser.setRole(updatedUser.getRole());
+        existedUser.setFirstName(updatedUser.getFirstName());
+        existedUser.setLastName(updatedUser.getLastName());
+        existedUser.setFullName(updatedUser.getFullName());
+        existedUser.setEmail_verified(updatedUser.getEmail_verified());
+        existedUser.setCreatedAt(LocalDateTime.now());
+
+        return userService.updateUser(existedUser);
     }
 
 
