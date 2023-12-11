@@ -3,7 +3,6 @@ package com.mikestudio.Spring_first.Services;
 import com.mikestudio.Spring_first.Models.User;
 import com.mikestudio.Spring_first.Repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.ErrorResponseException;
@@ -70,10 +69,22 @@ public  class UserService   {
     }
 
     //for saveRandomNumber(OTP)
-    public void save(User user,String num) {
+    public void save(String OTP) {
+        User user = new User();
+        user.getUserId();
+        user.getUsername();
+        user.getPassword();
+        user.getPhonenumber();
+        user.getDob();
+        user.getEmail();
+        user.getRole();
+        user.getFirstName();
+        user.getLastName();
+        user.getFullName();
+        user.getEmail_verified();
+        user.setOTP(OTP);
         user.setCreatedAt(LocalDateTime.now());
-        user.setRole("USER");
-        user.setOTP(num);
+
         userRepository.save(user);
     }
 

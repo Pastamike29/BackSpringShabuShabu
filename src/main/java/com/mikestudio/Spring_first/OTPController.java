@@ -1,15 +1,11 @@
 package com.mikestudio.Spring_first;
 
-import com.mikestudio.Spring_first.Models.User;
 import com.mikestudio.Spring_first.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.ServletOutputStream;
-import java.util.Scanner;
 
 @RestController
 public class OTPController {
@@ -27,7 +23,7 @@ public class OTPController {
     public ResponseEntity<String> verifyOTP(@RequestBody String enteredOTP){
         String genOTP = otPservice.getOTP();
         if (otPservice.isValidOTP(enteredOTP,genOTP)){
-            userService.save(new User(),genOTP);
+            userService.save(genOTP);
 
             return ResponseEntity.ok("OTP Verified!!");
         }
