@@ -1,8 +1,6 @@
 package com.mikestudio.Spring_first.Controllers;
 
-import com.mikestudio.Spring_first.Models.Payment;
 import com.mikestudio.Spring_first.Models.User;
-import com.mikestudio.Spring_first.EmailService;
 import com.mikestudio.Spring_first.OTPservice;
 import com.mikestudio.Spring_first.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,6 @@ import java.time.LocalDateTime;
 public class UserController  {
     @Autowired
     private  UserService userService;
-
-    @Autowired
-    private EmailService emailService;
     @Autowired
     private OTPservice  otPservice;
 
