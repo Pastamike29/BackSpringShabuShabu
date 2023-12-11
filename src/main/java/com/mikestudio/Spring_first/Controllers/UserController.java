@@ -2,6 +2,7 @@ package com.mikestudio.Spring_first.Controllers;
 
 import com.mikestudio.Spring_first.Models.User;
 import com.mikestudio.Spring_first.EmailService;
+import com.mikestudio.Spring_first.OTPservice;
 import com.mikestudio.Spring_first.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,8 @@ public class UserController  {
 
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private OTPservice  otPservice;
 
     //Use for control Authenticate Login
     @PostMapping("/0/auth/user")
@@ -50,6 +53,7 @@ public class UserController  {
     @PostMapping("/0/user")
     public User createUser(@RequestBody User user){
         user.setCreatedAt(LocalDateTime.now());
+        user.setOTP(otPservice.getOTP());
         user.setRole("USER");
         userService.put(user);
 

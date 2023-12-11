@@ -4,6 +4,7 @@ import com.mikestudio.Spring_first.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.imageio.spi.RegisterableService;
 import java.util.Random;
@@ -22,7 +23,6 @@ public class OTPservice {
         Random rand = new Random();
         int number = rand.nextInt(99999);
         String genOTP = String.format("%05d", number);
-        userService.save(genOTP);
         return genOTP;
     }
     //for verify OTP

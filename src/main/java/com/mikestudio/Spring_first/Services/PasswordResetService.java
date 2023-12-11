@@ -18,11 +18,5 @@ public class PasswordResetService {
             return false;
         }
     }
-//    public void setExpiryDate(PasswordResetToken passwordResetToken,int expirationMill){
-//        if (passwordResetToken != null){
-//            LocalDateTime now = LocalDateTime.now();
-//            LocalDateTime expiryDate = now.plus(expirationMill, ChronoUnit.MILLIS);
-//            passwordResetToken.setExpiryDate(expiryDate);
-//        }
-//    }
+
 }
