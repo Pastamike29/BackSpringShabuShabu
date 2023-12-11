@@ -50,7 +50,6 @@ public class EmailController {
             message.setText(messageContent);
             User user = new User();
             user.setOTP(genOTP);
-            userService.put(user);
             // Send the email
             mailSender.send(message);
 
