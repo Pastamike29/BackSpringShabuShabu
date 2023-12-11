@@ -29,11 +29,6 @@ public class OTPservice {
     }
     //for verify OTP
     public boolean isValidOTP(String enteredOTP,String genOTP){
-        if (enteredOTP.equals(genOTP)){
-            return true;
-        }
-        else {
-            return false;
-        }
+       return enteredOTP.equals(genOTP);
     }
 }

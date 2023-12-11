@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletOutputStream;
+import java.util.Scanner;
+
 @RestController
 public class OTPController {
     @Autowired
@@ -23,6 +26,7 @@ public class OTPController {
     @PostMapping("/0/verify-otp")
     public ResponseEntity<String> verifyOTP(@RequestBody String enteredOTP){
         String genOTP = otPservice.getOTP();
+        System.out.println("this is ver :" + genOTP);
         if (otPservice.isValidOTP(enteredOTP,genOTP)){
             userService.save(new User(),genOTP);
 

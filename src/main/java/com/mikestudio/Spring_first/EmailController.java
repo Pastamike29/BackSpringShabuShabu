@@ -25,15 +25,18 @@ public class EmailController {
     private JavaMailSender mailSender;
     @Autowired
     private OTPservice otPservice;
+    @Autowired
+    private UserService userService;
 
     //Email for authen
     @PostMapping("/0/email")
     public String sendEmail(@RequestBody EmailRequest emailRequest){
+        String genOTP = otPservice.getOTP();
         try {
             // Create the message content
             String messageContent = "This is From SINNCOSTANSHABU for Authentication your id\n" +
                     "For Authentication Please Input this number on our SignUp page.\n\n" +
-                    "\t\t\t\t" + otPservice.getOTP() + "\n\n\n\n" +
+                    "\t\t\t\t" + genOTP + "\n\n\n\n" +
                     "Warning: Don't send this email or number to other people.\t" +
                     LocalDateTime.now() + "\n" +
                     "Use for authentication only.\n" +
@@ -45,7 +48,7 @@ public class EmailController {
             message.setTo(emailRequest.getTo());
             message.setSubject("Authentication Information"); // Set your subject here
             message.setText(messageContent);
-
+            userService.save(new User(),genOTP);
             // Send the email
             mailSender.send(message);
 
@@ -53,6 +56,7 @@ public class EmailController {
         } catch (Exception e) {
             return "Error sending email: " + e.getMessage();
         }
+
     }
     @PostMapping("/0/resetPasswordEmail")
     public void sendResetPasswordEmail (String recipientEmail,String link) throws MessagingException, UnsupportedEncodingException {

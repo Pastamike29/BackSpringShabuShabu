@@ -1,6 +1,7 @@
 package com.mikestudio.Spring_first.Controllers;
 
 import com.mikestudio.Spring_first.Models.User;
+import com.mikestudio.Spring_first.OTPController;
 import com.mikestudio.Spring_first.OTPservice;
 import com.mikestudio.Spring_first.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class UserController  {
     public User createUser(@RequestBody User user){
         user.setCreatedAt(LocalDateTime.now());
         user.setRole("USER");
-        user.setOTP(otPservice.getOTP());
+        user.setOTP(user.getOTP());
         userService.put(user);
 
         return user;
