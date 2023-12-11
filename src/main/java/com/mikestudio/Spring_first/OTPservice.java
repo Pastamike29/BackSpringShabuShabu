@@ -4,6 +4,7 @@ import com.mikestudio.Spring_first.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.imageio.spi.RegisterableService;
@@ -19,6 +20,8 @@ public class OTPservice {
     }
 
     //Generate number
+
+    @GetMapping("/0/getOTP")
     public String getOTP() {
         Random rand = new Random();
         int number = rand.nextInt(99999);
