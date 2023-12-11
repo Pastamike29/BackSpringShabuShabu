@@ -49,7 +49,6 @@ public class UserController  {
     @PostMapping("/0/user")
     public User createUser(@RequestBody User user){
         user.setCreatedAt(LocalDateTime.now());
-        user.setOTP(otPservice.getOTP());
         user.setRole("USER");
         userService.put(user);
 

@@ -22,29 +22,20 @@ public class ResetPasswordController {
         this.emailController = emailController;
     }
 
-    public boolean isValidEmail(String enteredEmail,String exitedEmail){
-        if (enteredEmail.equals(exitedEmail)){
-            return true;
-        }
-        else {
-            return false;
-        }
+    public boolean isValidEmail(String enteredEmail,String email){
+        return enteredEmail.equals(email);
     }
     @PostMapping("/0/forgotPassword")
     public ResponseEntity<String> forgotPassword(@RequestBody String enteredEmail){
-        String email = "";
-        email = String.valueOf(userService.getEmail(email));
-        String resetPasswordLink = "http://localhost:3000/0/forgotPassword";
-        String token = UUID.randomUUID().toString();
 
         try {
-            if ( isValidEmail(enteredEmail, email)) {
+            String email = String.valueOf(userService.getEmail(enteredEmail));
+            String resetPasswordLink = "http://localhost:3000/login";
+            String token = UUID.randomUUID().toString();
+
                 userService.updateResetPasswordToken(token,enteredEmail);
                 emailController.sendResetPasswordEmail(enteredEmail, resetPasswordLink);
 
-            } else {
-                return ResponseEntity.badRequest().body("Invalid Email , Please Enter again");
-            }
         }
         catch (Exception e){
             e.getMessage();
