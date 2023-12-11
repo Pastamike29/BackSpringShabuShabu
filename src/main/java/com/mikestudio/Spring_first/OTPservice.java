@@ -20,8 +20,8 @@ public class OTPservice {
     //Generate number
     public String getOTP() {
         Random rand = new Random();
-        int number = rand.nextInt(999999);
-        String genOTP = String.format("%06d", number);
+        int number = rand.nextInt(99999);
+        String genOTP = String.format("%05d", number);
         userService.save(genOTP);
         return genOTP;
     }

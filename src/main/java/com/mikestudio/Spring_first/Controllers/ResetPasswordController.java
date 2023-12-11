@@ -33,12 +33,12 @@ public class ResetPasswordController {
     }
 
     //go to forgot password form
-    @GetMapping("/0/forgot-password")
+    @GetMapping("/0/forgotPassword")
     public String forgotPasswordForm(){
         return "forgot_password_form";
     }
 
-    @PostMapping("/0/forgot-password")
+    @PostMapping("/0/forgotPassword")
     public ResponseEntity<String> forgotPassword(@RequestBody String enteredEmail){
         String email = "" ;
         String URL = "http:localhost3000/0/forgotPassword";
