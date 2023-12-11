@@ -3,7 +3,6 @@ package com.mikestudio.Spring_first.Controllers;
 import com.mikestudio.Spring_first.EmailService;
 import com.mikestudio.Spring_first.Services.PasswordResetService;
 import com.mikestudio.Spring_first.Services.UserService;
-import com.mikestudio.Spring_first.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
+import java.util.UUID;
 
 
 @RestController
@@ -37,19 +37,16 @@ public class ResetPasswordController {
 
     @PostMapping("/0/forgotPassword")
     public ResponseEntity<String> forgotPassword(@RequestBody String enteredEmail){
-        String email = "" ;
-        String URL = "http://localhost:3000/0/forgotPassword";
-        String token = Arrays.toString(SecureRandom.getSeed(30));
-        String resetPasswordLink = URL;
-        email = String.valueOf(userService.getEmail(email));
+        String email = enteredEmail;
+        String resetPasswordLink = "http://localhost:3000/0/forgotPassword";
+        String token = UUID.randomUUID().toString();
+        String existedEmail = String.valueOf(userService.getEmail(email));
         try {
-            if (passwordResetService.isValidEmail(enteredEmail, email)) {
-                userService.updateResetPasswordToken(token,enteredEmail);
-                emailService.sendResetPasswordEmail(enteredEmail, resetPasswordLink);
+            if (passwordResetService.isValidEmail(enteredEmail, existedEmail)) {
+                userService.updateResetPasswordToken(token,email);
+                emailService.sendResetPasswordEmail(email,resetPasswordLink);
 
             } else {
-                userService.updateResetPasswordToken(token,enteredEmail);
-                emailService.sendResetPasswordEmail(enteredEmail, resetPasswordLink);
                 return ResponseEntity.badRequest().body("Invalid Email , Please Enter again");
             }
         }

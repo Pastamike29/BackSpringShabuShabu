@@ -10,8 +10,8 @@ public class PasswordResetService {
     private EmailService emailService;
 
     //for verify Email to Reset Password
-    public boolean isValidEmail(String enteredEmail,String email){
-        if (enteredEmail.equals(email)){
+    public boolean isValidEmail(String enteredEmail,String exitedEmail){
+        if (enteredEmail.equals(exitedEmail)){
             return true;
         }
         else {

@@ -46,12 +46,11 @@ public class EmailService{
     //Email for reset password
     public void sendResetPasswordEmail (String recipientEmail,String link) throws MessagingException, UnsupportedEncodingException {
            {
-                link = "http:localhost3000/0/forgotPassword";
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
 
             helper.setFrom("sinncostanshabu@gmail.com", "SINNCOSTANSHABU Support");
-            helper.setTo(recipientEmail);
+            helper.setBcc(recipientEmail);
 
             String subject = "Here's the link to reset your password";
 
